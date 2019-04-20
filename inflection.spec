@@ -4,7 +4,7 @@
 #
 Name     : inflection
 Version  : 0.3.1
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/d5/35/a6eb45b4e2356fe688b21570864d4aa0d0a880ce387defe9c589112077f8/inflection-0.3.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d5/35/a6eb45b4e2356fe688b21570864d4aa0d0a880ce387defe9c589112077f8/inflection-0.3.1.tar.gz
 Summary  : A port of Ruby on Rails inflector to Python
