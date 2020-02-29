@@ -4,20 +4,94 @@
 #
 Name     : inflection
 Version  : 0.3.1
-Release  : 6
+Release  : 7
 URL      : https://files.pythonhosted.org/packages/d5/35/a6eb45b4e2356fe688b21570864d4aa0d0a880ce387defe9c589112077f8/inflection-0.3.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d5/35/a6eb45b4e2356fe688b21570864d4aa0d0a880ce387defe9c589112077f8/inflection-0.3.1.tar.gz
 Summary  : A port of Ruby on Rails inflector to Python
 Group    : Development/Tools
 License  : MIT
+Requires: inflection-license = %{version}-%{release}
 Requires: inflection-python = %{version}-%{release}
 Requires: inflection-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
+Inflection
 ==========
-        
-        |build status|_
+
+|build status|_
+
+.. |build status| image:: https://secure.travis-ci.org/jpvanhal/inflection.png?branch=master
+   :alt: Build Status
+.. _build status: http://travis-ci.org/jpvanhal/inflection
+
+Inflection is a string transformation library.  It singularizes and pluralizes
+English words, and transforms strings from CamelCase to underscored string.
+Inflection is a port of `Ruby on Rails`_' `inflector`_ to Python.
+
+.. _Ruby on Rails: http://rubyonrails.org
+.. _inflector: http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html
+
+Resources
+---------
+
+- `Documentation <http://inflection.readthedocs.org/>`_
+- `Issue Tracker <http://github.com/jpvanhal/inflection/issues>`_
+- `Code <http://github.com/jpvanhal/inflection>`_
+- `Development Version
+  <http://github.com/jpvanhal/inflection/zipball/master#egg=Inflection-dev>`_
+
+
+Changelog
+---------
+
+Here you can see the full list of changes between each Inflection release.
+
+0.3.1 (May 3, 2015)
+^^^^^^^^^^^^^^^^^^^
+
+- Fixed trove classifiers not showing up on PyPI.
+- Fixed "human" pluralized as "humen" and not "humans".
+- Fixed "potato" pluralized as "potatos" and not "potatoes".
+
+0.3.0 (March 1, 2015)
++++++++++++++++++++++
+
+- Added `tableize()` function.
+
+0.2.1 (September 3, 2014)
++++++++++++++++++++++++++
+
+- Added Python 2, Python 3 and Python 3.4 trove classifiers.
+
+0.2.0 (June 15, 2013)
++++++++++++++++++++++
+
+- Added initial support for Python 3.
+- Dropped Python 2.5 support.
+
+0.1.2 (March 13, 2012)
+++++++++++++++++++++++
+
+- Added Python 2.5 support.
+
+0.1.1 (February 24, 2012)
++++++++++++++++++++++++++
+
+- Fixed some files not included in the distribution package.
+
+0.1.0 (February 24, 2012)
++++++++++++++++++++++++++
+
+- Initial public release
+
+%package license
+Summary: license components for the inflection package.
+Group: Default
+
+%description license
+license components for the inflection package.
+
 
 %package python
 Summary: python components for the inflection package.
@@ -32,6 +106,7 @@ python components for the inflection package.
 Summary: python3 components for the inflection package.
 Group: Default
 Requires: python3-core
+Provides: pypi(inflection)
 
 %description python3
 python3 components for the inflection package.
@@ -39,17 +114,28 @@ python3 components for the inflection package.
 
 %prep
 %setup -q -n inflection-0.3.1
+cd %{_builddir}/inflection-0.3.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1541265029
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582937665
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/inflection
+cp %{_builddir}/inflection-0.3.1/LICENSE %{buildroot}/usr/share/package-licenses/inflection/361e47efe4e325f7acf8a9380227b12fe3d77cab
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -57,6 +143,10 @@ echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/inflection/361e47efe4e325f7acf8a9380227b12fe3d77cab
 
 %files python
 %defattr(-,root,root,-)
