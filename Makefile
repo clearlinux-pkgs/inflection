@@ -1,5 +1,5 @@
 PKG_NAME := inflection
-URL = https://files.pythonhosted.org/packages/d5/35/a6eb45b4e2356fe688b21570864d4aa0d0a880ce387defe9c589112077f8/inflection-0.3.1.tar.gz
+URL = https://files.pythonhosted.org/packages/e8/dc/3986343faf9631d8bc61d8a6a1331b5f4f08723dbce3b39f524c367a1621/inflection-0.4.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
