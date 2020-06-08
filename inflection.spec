@@ -4,7 +4,7 @@
 #
 Name     : inflection
 Version  : 0.5.0
-Release  : 9
+Release  : 10
 URL      : https://files.pythonhosted.org/packages/87/41/07fa466e0525635243f0cb94f81b9e99508edc23af7d9bf6c2009e11eadc/inflection-0.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/87/41/07fa466e0525635243f0cb94f81b9e99508edc23af7d9bf6c2009e11eadc/inflection-0.5.0.tar.gz
 Summary  : A port of Ruby on Rails inflector to Python
@@ -56,7 +56,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591627116
+export SOURCE_DATE_EPOCH=1591633347
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
